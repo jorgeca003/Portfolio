@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("jorgeca003@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const programmingLanguages = [
     "C/C++",
@@ -193,10 +201,30 @@ function App() {
             <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
               Contact
             </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              {/* Content to be added */}
-              Coming soon...
+            <p className="text-gray-700 dark:text-gray-300 mb-6">
+              Let's connect! Feel free to reach out via email for opportunities,
+              collaborations, or just to say hello.
             </p>
+
+            {/* Contact Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="mailto:jorgeca003@gmail.com?subject=Portfolio Inquiry"
+                className="flex items-center gap-2 px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
+              >
+                <MdEmail className="text-2xl" />
+                <span className="font-medium">Send Email</span>
+              </a>
+
+              <button
+                onClick={handleCopyEmail}
+                className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors shadow-md hover:shadow-lg"
+              >
+                <span className="font-medium">
+                  {copied ? "✓ Copied!" : "📋 Copy Email"}
+                </span>
+              </button>
+            </div>
           </div>
         </section>
 
