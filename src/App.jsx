@@ -124,7 +124,7 @@ function App() {
               About Me
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              With 9 years of experience in the tech industri, I specialize in
+              With 9 years of experience in the tech industry, I specialize in
               software engineering and technical support within Emerson's NI
               Test & Measurement division. I aim to develop innovative solutions
               that align with Emerson's commitment to high-quality standards and
