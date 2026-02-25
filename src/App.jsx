@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaRegFileAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import "./App.css";
 
@@ -112,13 +112,13 @@ function App() {
                     <span className="font-medium">LinkedIn</span>
                   </a>
                   <a
-                    href="/cv.pdf"
+                    href="/Resume%20Jorge%20Castro.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-md hover:shadow-lg"
                   >
-                    <FaFileDownload className="text-2xl" />
-                    <span className="font-medium">Download CV</span>
+                    <FaRegFileAlt className="text-2xl" />
+                    <span className="font-medium">Resume</span>
                   </a>
                 </div>
               </div>
@@ -133,13 +133,18 @@ function App() {
               About Me
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              With 9 years of experience in the tech industry, I specialize in
-              software engineering and technical support within Emerson's NI
-              Test & Measurement division. I aim to develop innovative solutions
-              that align with Emerson's commitment to high-quality standards and
-              efficiency. My expertise in LabVIEW, C#, C/C++, Python, and
-              JavaScript enables me to contribute unique perspectives and
-              diverse experiences to our team's objectives.
+              Senior Software Engineer with 9 years of experience delivering
+              high-impact, scalable solutions for the semiconductor and
+              high-tech industries.Proven track record in designing and
+              maintaining complex systems that integrate hardware and software,
+              accomplished through the creation of detailed feature
+              specifications, workflow automation, and strategic coordination
+              with R&D, manufacturing, and business stakeholders to gather
+              requirements and deliver results. Recognized for high-level
+              technical leadership and owning end-to-end feature development in
+              ambiguous environments. Adept at bridging technical complexity
+              with business while continuously identifying opportunities to
+              optimize processes and modernize legacy systems.
             </p>
           </div>
         </section>
