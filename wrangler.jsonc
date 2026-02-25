@@ -1,9 +1,7 @@
 {
   "name": "portfolio",
   "compatibility_date": "2026-02-14",
-  "assets": {
-    "directory": "./dist",
-  },
+  "pages_build_output_dir": "./dist",
   // Set real values in Cloudflare Pages dashboard (Settings > Environment Variables)
   // or in a .dev.vars file for local development.
   // "vars": {
