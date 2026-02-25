@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import "./App.css";
+
+// Fallback content used when the API is unavailable
+const FALLBACK = {
+  summary:
+    "With 9 years of experience in the tech industry, I specialize in software engineering and technical support within Emerson's NI Test & Measurement division. I aim to develop innovative solutions that align with Emerson's commitment to high-quality standards and efficiency. My expertise in LabVIEW, C#, C/C++, Python, and JavaScript enables me to contribute unique perspectives and diverse experiences to our team's objectives.",
+  bio: "Results-driven Software Engineer with 9 years of experience in software development, technical support, and test engineering for high-tech and semiconductor industries.",
+  cvUrl: null,
+};
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [content, setContent] = useState(FALLBACK);
+  const [contentLoading, setContentLoading] = useState(true);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("jorgeca003@gmail.com");
@@ -39,6 +49,28 @@ function App() {
     "PyCharm",
     "Docker",
   ];
+
+  // Fetch content from Notion via Cloudflare Pages Function
+  useEffect(() => {
+    async function fetchContent() {
+      try {
+        const res = await fetch("/api/content");
+        if (res.ok) {
+          const data = await res.json();
+          setContent({
+            summary: data.summary || FALLBACK.summary,
+            bio: data.bio || FALLBACK.bio,
+            cvUrl: data.cvUrl || FALLBACK.cvUrl,
+          });
+        }
+      } catch (err) {
+        console.warn("Failed to fetch CMS content, using fallback:", err);
+      } finally {
+        setContentLoading(false);
+      }
+    }
+    fetchContent();
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -86,13 +118,15 @@ function App() {
                   Software Engineer
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  Results-driven Software Engineer with 9 years of experience in
-                  software development, technical support, and test engineering
-                  for high-tech and semiconductor industries.
+                  {contentLoading ? (
+                    <span className="inline-block w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+                  ) : (
+                    content.bio
+                  )}
                 </p>
 
                 {/* Social Links */}
-                <div className="flex gap-4 justify-center md:justify-start">
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                   <a
                     href="https://github.com/jorgeca003"
                     target="_blank"
@@ -111,6 +145,17 @@ function App() {
                     <FaLinkedin className="text-2xl" />
                     <span className="font-medium">LinkedIn</span>
                   </a>
+                  {content.cvUrl && (
+                    <a
+                      href="/api/cv"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-md hover:shadow-lg"
+                    >
+                      <FaFileDownload className="text-2xl" />
+                      <span className="font-medium">Download CV</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -123,15 +168,17 @@ function App() {
             <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
               About Me
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              With 9 years of experience in the tech industry, I specialize in
-              software engineering and technical support within Emerson's NI
-              Test & Measurement division. I aim to develop innovative solutions
-              that align with Emerson's commitment to high-quality standards and
-              efficiency. My expertise in LabVIEW, C#, C/C++, Python, and
-              JavaScript enables me to contribute unique perspectives and
-              diverse experiences to our team's objectives.
-            </p>
+            {contentLoading ? (
+              <div className="space-y-3">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-full" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-5/6" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-4/6" />
+              </div>
+            ) : (
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {content.summary}
+              </p>
+            )}
           </div>
         </section>
 
