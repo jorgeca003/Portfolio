@@ -183,17 +183,19 @@ function App() {
         </section>
 
         {/* Projects Section */}
-        <section className="mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-              Projects
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              {/* Content to be added */}
-              Coming soon...
-            </p>
-          </div>
-        </section>
+        {false && (
+          <section className="mb-16">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                Projects
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                {/* Content to be added */}
+                Coming soon...
+              </p>
+            </div>
+          </section>
+        )}
 
         {/* Contact Section */}
         <section className="mb-16">
