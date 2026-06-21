@@ -7,11 +7,31 @@ import "./App.css";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [copied, setCopied] = useState(false);
+  const localResumeUrl = "/Resume%20Jorge%20Castro.pdf";
+  const resumeUrl =
+    "https://gtvault-my.sharepoint.com/:b:/g/personal/jcastro84_gatech_edu/IQBsZz961ox_Qa6AfNeCWMV-AQe0grlwqqo7A5ziAN9e04g?e=SZhq51&download=1";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("jorgeca003@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleResumeClick = async (event) => {
+    event.preventDefault();
+    const resumeWindow = window.open("", "_blank", "noopener,noreferrer");
+
+    if (!resumeWindow) {
+      window.location.href = resumeUrl;
+      return;
+    }
+
+    try {
+      await fetch(resumeUrl, { method: "HEAD", mode: "no-cors" });
+      resumeWindow.location.href = resumeUrl;
+    } catch {
+      resumeWindow.location.href = localResumeUrl;
+    }
   };
 
   const programmingLanguages = [
@@ -112,9 +132,10 @@ function App() {
                     <span className="font-medium">LinkedIn</span>
                   </a>
                   <a
-                    href="/Resume%20Jorge%20Castro.pdf"
+                    href={resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleResumeClick}
                     className="flex items-center gap-2 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-md hover:shadow-lg"
                   >
                     <FaRegFileAlt className="text-2xl" />
